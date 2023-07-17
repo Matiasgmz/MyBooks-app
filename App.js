@@ -16,7 +16,7 @@ function StackNavigator() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Categorie" component={Category} />
-      <Stack.Screen name="Screen1" component={BooksByCategory} />
+      <Stack.Screen name="BookByCategorie" component={BooksByCategory} />
     </Stack.Navigator>
   );
 }
@@ -24,7 +24,7 @@ function StackNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{headerShown: false}}>
 
         <Tab.Screen
           name="Home"
@@ -37,6 +37,7 @@ export default function App() {
         />
 
         <Tab.Screen
+ 
           name="Catégorie"
           options={{
             tabBarIcon: ({ color, size }) => (

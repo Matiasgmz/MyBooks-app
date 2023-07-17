@@ -19,7 +19,7 @@ export default function Home() {
 
     return (
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop: 50 }}>
             <ScrollView>
 
                 <View style={styles.rowContainer}>
@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
         padding: 4
     },
     modalView: {
-        margin: 20,
+        margin: 50,
+        marginTop: 100,
         backgroundColor: 'white',
         borderRadius: 20,
         padding: 2,
