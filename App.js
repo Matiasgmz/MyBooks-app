@@ -1,11 +1,25 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack' ;
 import Category from './components/Category';
 import Home from './components/Home';
 import SearchBook from './components/SearchBook';
+import BooksByCategory from './components/BooksByCategory';
 
 const Tab = createBottomTabNavigator();
+
+
+const Stack = createStackNavigator();
+
+function StackNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Categorie" component={Category} />
+      <Stack.Screen name="Screen1" component={BooksByCategory} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -29,7 +43,7 @@ export default function App() {
               <Ionicons name="list" color={color} size={size} />
             ),
           }}
-          component={Category}
+          component={StackNavigator}
         />
 
 

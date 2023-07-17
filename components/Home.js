@@ -24,7 +24,7 @@ export default function Home() {
 
                 <View style={styles.rowContainer}>
                     {LIVRES.map((livre, index) =>
-                        <Pressable key={index} style={styles.cardTest} onPress={() => { setModalVisible(true); handleLivrePress(livre) }}>
+                        <Pressable key={index} style={styles.card} onPress={() => { setModalVisible(true); handleLivrePress(livre) }}>
                             <Image source={{ uri: livre.imageUrl }} style={styles.image} />
                             <Text style={styles.titleCard}>{livre.titre}</Text>
                         </Pressable>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
     },
 
-    cardTest: {
+    card: {
         textAlign: 'center',
         borderWidth: 1,
         borderColor: '#cccccc',
