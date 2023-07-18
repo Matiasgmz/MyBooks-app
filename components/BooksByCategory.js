@@ -24,7 +24,7 @@ export default function BooksByCategory({ route }) {
 
   return (
 
-    <View style={{ flex: 1, marginTop: 50 }}>
+    <View style={{ flex: 1, marginTop: 50, padding: 10 }}>
       <Text style={{ fontWeight: 'bold', fontSize: 50, color: route.params.categorie.couleur, marginTop: 20}}>{route.params.categorie.genre.charAt(0).toUpperCase() + route.params.categorie.genre.slice(1)}</Text>
       <View style={{ height: 5, width: '100%', backgroundColor: route.params.categorie.couleur,  marginBottom: 20}}></View>
       <View style={styles.rowContainer}>

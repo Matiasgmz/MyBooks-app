@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import { CheckBox, Icon  } from '@rneui/themed';
+import { CheckBox, Icon } from '@rneui/themed';
 import { CATEGORIES } from '../data/data';
 import { Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,7 +24,7 @@ export default function AddBook() {
 
     const handleAddBook = async () => {
         const newBook = {
-    
+
             titre,
             description,
             tomes,
@@ -43,7 +43,7 @@ export default function AddBook() {
             books.push(newBook);
 
             await AsyncStorage.setItem('books', JSON.stringify(books));
-        
+
 
             console.log(await AsyncStorage.getItem('books'))
         } catch (error) {
@@ -55,7 +55,9 @@ export default function AddBook() {
 
     return (
         <View style={{ flex: 1, marginTop: 50, padding: 20 }}>
-            <Text style={{fontSize: 50, textAlign: 'center', marginBottom: 50}}>Ajouter un livre</Text>
+            <Text style={{ fontSize: 50, textAlign: 'flex-start', marginBottom: 15 }}>Ajouter un livre</Text>
+            <View style={{ height: 5, width: '100%', backgroundColor: 'black', marginBottom: 20 }}></View>
+
             <ScrollView>
                 <TextInput
                     placeholder='Nom'
