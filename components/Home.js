@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LIVRES } from "../data/data";
 import { CATEGORIES } from "../data/data";
 import { useState } from "react";
@@ -8,13 +8,24 @@ export default function Home() {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [dataBook, setDataBook] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredLivres, setFilteredLivres] = useState([]);
 
     const handleLivrePress = (livre) => {
         setDataBook(livre);
+        setSearchQuery('');
     };
+
 
     const getCategoriesByIds = (ids) => {
         return CATEGORIES.filter((categorie) => ids?.includes(categorie.id));
+    };
+
+    const handleSearch = () => {
+        const filteredLivres = LIVRES.filter((livre) =>
+            livre.titre.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredLivres(filteredLivres);
     };
 
     return (
@@ -22,12 +33,36 @@ export default function Home() {
         <View style={{ flex: 1, marginTop: 50 }}>
             <ScrollView>
 
+                <View style={styles.searchContainer}>
+                    <TextInput
+                        style={styles.searchInput}
+                        placeholder="Rechercher un livre"
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
+                    />
+                    <TouchableOpacity
+                        style={styles.searchButton}
+                        onPress={() => handleSearch()}
+                    >
+                        <Text style={styles.searchButtonText}>Rechercher</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <View style={styles.rowContainer}>
-                    {LIVRES.map((livre, index) =>
-                        <Pressable key={index} style={styles.card} onPress={() => { setModalVisible(true); handleLivrePress(livre) }}>
-                            <Image source={{ uri: livre.imageUrl }} style={styles.image} />
-                            <Text style={styles.titleCard}>{livre.titre}</Text>
-                        </Pressable>
+                    {filteredLivres.length > 0 ? (
+                        filteredLivres.map((livre, index) => (
+                            <Pressable key={index} style={styles.card} onPress={() => { setModalVisible(true); handleLivrePress(livre) }}>
+                                <Image source={{ uri: livre.imageUrl }} style={styles.image} />
+                                <Text style={styles.titleCard}>{livre.titre}</Text>
+                            </Pressable>
+                        ))
+                    ) : (
+                        LIVRES.map((livre, index) => (
+                            <Pressable key={index} style={styles.card} onPress={() => { setModalVisible(true); handleLivrePress(livre) }}>
+                                <Image source={{ uri: livre.imageUrl }} style={styles.image} />
+                                <Text style={styles.titleCard}>{livre.titre}</Text>
+                            </Pressable>
+                        ))
                     )}
                 </View>
 
@@ -45,13 +80,13 @@ export default function Home() {
                             <Text style={styles.textTome}>tome : {dataBook?.tomes}</Text>
                             <Text>{dataBook?.description} </Text>
 
-                      
-                            <Text>{dataBook?.categorieId }</Text>
+
+                            <Text>{dataBook?.categorieId}</Text>
                             <Text style={styles.modalSubtitle}>Catégories:</Text>
-                            {getCategoriesByIds(dataBook?.categories).map((categorie) => (
-                                <Text key={categorie.id}>{categorie[1]}</Text>
+                            {getCategoriesByIds(dataBook?.categoriesId).map((categorie) => (
+                                <Text key={categorie.id}>{categorie.genre}</Text>
                             ))}
-                            
+
                         </View>
 
 
@@ -121,12 +156,12 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'flex-end',
         padding: 0
-    }, 
+    },
     modalContent: {
         padding: 25,
         alignItems: 'center',
-    }, 
-    
+    },
+
     titleModal: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -143,6 +178,33 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'yellow',
         borderRadius: 15
-    }
+    }, 
+    searchContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginVertical: 10,
+        padding: 10
+      },
+      searchInput: {
+        flex: 1,
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#cccccc',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginRight: 10,
+      },
+      searchButton: {
+        backgroundColor: '#4287f5',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 5,
+      },
+      searchButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      }
 })
 

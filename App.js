@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack' ;
+import { createStackNavigator } from '@react-navigation/stack';
 import Category from './components/Category';
 import Home from './components/Home';
-import SearchBook from './components/SearchBook';
 import BooksByCategory from './components/BooksByCategory';
+import AddBook from './components/AddBook';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function StackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Categorie" component={Category} />
       <Stack.Screen name="BookByCategorie" component={BooksByCategory} />
     </Stack.Navigator>
@@ -24,7 +24,7 @@ function StackNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{headerShown: false}}>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
 
         <Tab.Screen
           name="Home"
@@ -37,7 +37,7 @@ export default function App() {
         />
 
         <Tab.Screen
- 
+
           name="Catégorie"
           options={{
             tabBarIcon: ({ color, size }) => (
@@ -47,15 +47,15 @@ export default function App() {
           component={StackNavigator}
         />
 
-
         <Tab.Screen
-          name="Recherche"
+
+          name="Ajouter"
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="search-outline" color={color} size={size} />
+              <Ionicons name="add-circle-outline" color={color} size={size} />
             ),
           }}
-          component={SearchBook}
+          component={AddBook}
         />
       </Tab.Navigator>
     </NavigationContainer>
