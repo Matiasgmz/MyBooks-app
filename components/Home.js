@@ -1,8 +1,9 @@
 import { Button, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LIVRES } from "../data/data";
 import { CATEGORIES } from "../data/data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
 
@@ -10,6 +11,41 @@ export default function Home() {
     const [dataBook, setDataBook] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredLivres, setFilteredLivres] = useState([]);
+
+
+  
+    const [books, setBooks] = useState([]);
+
+    useEffect(() => {
+        // Récupérer les livres depuis AsyncStorage lors du chargement du composant
+        fetchBooksFromAsyncStorage();
+    }, []);
+
+    useEffect(() => {
+ 
+        saveBooksToAsyncStorage();
+    }, [books]);
+
+    const fetchBooksFromAsyncStorage = async () => {
+        try {
+            const storedBooks = await AsyncStorage.getItem('books');
+            if (storedBooks) {
+                setBooks(JSON.parse(storedBooks));
+            }
+            console.log(await AsyncStorage.getItem('books'))
+        } catch (error) {
+            console.log('Erreur lors de la récupération des livres depuis AsyncStorage:', error);
+        }
+    };
+
+    const saveBooksToAsyncStorage = async () => {
+        try {
+            await AsyncStorage.setItem('books', JSON.stringify(books));
+            console.log('Livres save');
+        } catch (error) {
+            console.log('Erreur:', error);
+        }
+    };
 
     const handleLivrePress = (livre) => {
         setDataBook(livre);
@@ -178,15 +214,15 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'yellow',
         borderRadius: 15
-    }, 
+    },
     searchContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
         marginVertical: 10,
         padding: 10
-      },
-      searchInput: {
+    },
+    searchInput: {
         flex: 1,
         height: 40,
         borderWidth: 1,
@@ -194,17 +230,17 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         marginRight: 10,
-      },
-      searchButton: {
+    },
+    searchButton: {
         backgroundColor: '#4287f5',
         paddingVertical: 10,
         paddingHorizontal: 15,
         borderRadius: 5,
-      },
-      searchButtonText: {
+    },
+    searchButtonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
-      }
+    }
 })
 
