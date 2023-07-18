@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import { CheckBox } from '@rneui/themed';
+import { CheckBox, Icon  } from '@rneui/themed';
 import { CATEGORIES } from '../data/data';
 import { Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -55,6 +55,7 @@ export default function AddBook() {
 
     return (
         <View style={{ flex: 1, marginTop: 50, padding: 20 }}>
+            <Text style={{fontSize: 50, textAlign: 'center', marginBottom: 50}}>Ajouter un livre</Text>
             <ScrollView>
                 <TextInput
                     placeholder='Nom'
@@ -90,8 +91,9 @@ export default function AddBook() {
                             checked={checkedItems[index] || false}
                             onPress={() => handleCheckboxChange(index)}
                             iconType="material-community"
-                            checkedIcon="checkbox-outline"
-                            uncheckedIcon={'checkbox-blank-outline'}
+                            checkedIcon="bookmark"
+                            uncheckedIcon="bookmark-outline"
+                            checkedColor="black"
 
                             title={categorie.genre}
                         />
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 40,
         borderWidth: 1,
-        borderColor: '#cccccc',
+        borderColor: 'black',
         borderRadius: 5,
         paddingHorizontal: 10,
         marginBottom: 10,
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 100,
         borderWidth: 1,
-        borderColor: '#cccccc',
+        borderColor: 'black',
         borderRadius: 5,
         paddingHorizontal: 10,
         marginBottom: 10,

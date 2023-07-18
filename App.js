@@ -1,13 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Category from './components/Category';
 import Home from './components/Home';
 import BooksByCategory from './components/BooksByCategory';
 import AddBook from './components/AddBook';
 
-const Tab = createBottomTabNavigator();
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+const Tab = createMaterialBottomTabNavigator();
 
 
 const Stack = createStackNavigator();
@@ -23,15 +24,19 @@ function StackNavigator() {
 
 export default function App() {
   return (
+
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator activeColor="black"
+        inactiveColor="#3e2465"
+        barStyle={{ backgroundColor: 'rgba(29, 161, 242, 0.2)', height: 80 }} screenOptions={{ headerShown: false }}>
 
         <Tab.Screen
           name="Home"
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <Ionicons name="home" color={color} size={25} />
             ),
+            tabBarLabel: '', 
           }}
           component={Home}
         />
@@ -41,8 +46,9 @@ export default function App() {
           name="Catégorie"
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="list" color={color} size={size} />
+              <Ionicons name="list" color={color} size={25} />
             ),
+            tabBarLabel: '', 
           }}
           component={StackNavigator}
         />
@@ -52,8 +58,9 @@ export default function App() {
           name="Ajouter"
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="add-circle-outline" color={color} size={size} />
+              <Ionicons name="add-circle-outline" color={color} size={25} />
             ),
+            tabBarLabel: '', 
           }}
           component={AddBook}
         />
@@ -61,3 +68,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+
+

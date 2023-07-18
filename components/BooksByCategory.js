@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
 
 card: {
     textAlign: 'center',
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: '#cccccc',
     marginTop: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     borderRadius: 15,
     paddingBottom: 15,
     flexDirection: 'column',
@@ -93,8 +93,7 @@ image: {
     width: 180,
     height: 280,
     resizeMode: 'cover',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderRadius: 15
 },
 
 titleCard: {

@@ -2,8 +2,10 @@ import { Button, Image, Modal, Pressable, ScrollView, StyleSheet, Text, TextInpu
 import { LIVRES } from "../data/data";
 import { CATEGORIES } from "../data/data";
 import { useEffect, useState } from "react";
-import { Ionicons } from '@expo/vector-icons';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
+
 
 export default function Home() {
 
@@ -13,7 +15,7 @@ export default function Home() {
     const [filteredLivres, setFilteredLivres] = useState([]);
 
 
-  
+
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
@@ -22,7 +24,7 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
- 
+
         saveBooksToAsyncStorage();
     }, [books]);
 
@@ -80,7 +82,8 @@ export default function Home() {
                         style={styles.searchButton}
                         onPress={() => handleSearch()}
                     >
-                        <Text style={styles.searchButtonText}>Rechercher</Text>
+                        <Ionicons name="search-outline" color={'white'} size={20} />
+
                     </TouchableOpacity>
                 </View>
 
@@ -148,10 +151,10 @@ const styles = StyleSheet.create({
 
     card: {
         textAlign: 'center',
-        borderWidth: 1,
+        borderWidth: 0,
         borderColor: '#cccccc',
         marginTop: 10,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         borderRadius: 15,
         paddingBottom: 15,
         flexDirection: 'column',
@@ -163,15 +166,15 @@ const styles = StyleSheet.create({
         width: 180,
         height: 280,
         resizeMode: 'cover',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
+        borderRadius: 15
     },
 
     titleCard: {
         fontSize: 13,
         fontWeight: 'bold',
         marginTop: 12,
-        padding: 4
+        padding: 4,
+        color: 'rgba(0, 0, 0, 0.7)'
     },
     modalView: {
         margin: 50,
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         backgroundColor: 'yellow',
-        borderRadius: 15
+        borderRadius: 15,
     },
     searchContainer: {
         flexDirection: 'row',
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     searchButton: {
-        backgroundColor: '#4287f5',
+        backgroundColor: '#1da1f2',
         paddingVertical: 10,
         paddingHorizontal: 15,
         borderRadius: 5,
