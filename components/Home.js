@@ -120,12 +120,6 @@ export default function Home() {
                             <Text>{dataBook?.description} </Text>
 
 
-                            <Text>{dataBook?.categorieId}</Text>
-                            <Text style={styles.modalSubtitle}>Catégories:</Text>
-                            {getCategoriesByIds(dataBook?.categoriesId).map((categorie) => (
-                                <Text key={categorie.id}>{categorie.genre}</Text>
-                            ))}
-
                         </View>
 
 
